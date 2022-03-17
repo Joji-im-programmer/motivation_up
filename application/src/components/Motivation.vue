@@ -12,6 +12,7 @@
               v-model="nickname"
               placeholder="ニックネームを入力"
               :rules="[required]"
+              disabled
             ></v-text-field>
           </v-col>
           <v-col cols="4">
@@ -79,7 +80,14 @@
           </v-col>
         </v-row>
         <v-row>
-
+          <v-col>
+            社会人になって{{countDate}}日が経過しました。
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col>
+            もうすっかり大人だね！！
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -93,11 +101,18 @@
       return{
         count:null,
         message: null,
-        nickname: null,
+        nickname: "りこちゃん",
         button:false,
         required: value => !!value || '必ず入力してね。',
         items: ["頑張れ！！", "元気！？", "そういう日もあるよね、", "こっからっしょ！"]
       }
+    },
+    computed:{
+      countDate(){
+        const now = new Date();
+        const work = new Date(2021, 3, 1);
+        return Math.floor((now-work)/ 1000 / 60 / 60 / 24);
+      },
     },
     methods:{
       enter(){
